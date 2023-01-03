@@ -1,11 +1,13 @@
 import pytest
 
 import yegorcallcenter.CallCenter as CC
-import yegorcallcenter.Call
+import yegorcallcenter.Call as Call
+import yegorcallcenter.Issue as Issue
+import yegorcallcenter.Caller as Caller
 
 def test_callcenter_creation():
     call_center = CC.CallCenter()
-    assert  not call_center._activecalls
+    assert not call_center._activecalls
     assert not call_center._employee
     assert not call_center._queue
 
@@ -14,6 +16,12 @@ def test_callcenter_creation():
 
 def test_callcenter_new_call():
     call_center = CC.CallCenter(10,2,1)
+    
+    caller_01 = Caller.Caller("testter_01")
+    issue_01 = Issue.Issue()
+    call_01 = Call.Call(caller_01,issue_01)
+
+    call_center.incomming_call(call_01)
 
 
 def test_callcenter_overload():
