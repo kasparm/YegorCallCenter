@@ -1,7 +1,6 @@
-import itertools
+import random
 
 class Issue():
-    id = itertools.count()
     def __init__(self) -> None:
         """Description of issue. Is issue resolved or not
 
@@ -10,5 +9,10 @@ class Issue():
         """
         self._id = id
         self._status = 0
+        self._difficulty = random.choice([0,1,2])
+
+
     def set_resolved(self):
         self._status = 1
+    def get_status(self):
+        return self._status

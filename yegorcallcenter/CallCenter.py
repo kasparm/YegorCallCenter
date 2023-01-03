@@ -1,4 +1,5 @@
 from yegorcallcenter import Employee as E
+from yegorcallcenter import Call as C
 
 
 
@@ -26,6 +27,7 @@ class CallCenter():
 
 
 
-    def incomming_call():
-        pass
+    def incomming_call(self, call:C):
+        self._activecalls.append(call)
+        
 
