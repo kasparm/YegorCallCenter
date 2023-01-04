@@ -9,6 +9,5 @@ class Call():
         self._employee = []
         
 
-    
-
-
+    def get_issue(self):
+        return self._issue

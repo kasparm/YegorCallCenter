@@ -16,3 +16,5 @@ class Issue():
         self._status = 1
     def get_status(self):
         return self._status
+    def get_difficulty(self):
+        return self._difficulty
