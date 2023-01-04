@@ -14,6 +14,8 @@ class CallCenter():
             n_director (int, optional): _description_. Defaults to 0.
         """
         self._activecalls = []
+        self._incommingcalls = []
+
         #initiate employees
         self._employee = []
         self._queue = []
@@ -28,6 +30,9 @@ class CallCenter():
 
 
     def incomming_call(self, call:C):
-        self._activecalls.append(call)
+        self._incommingcalls.append(call)
+
         
+    #def escalate_call(self, call:C):
+
 
