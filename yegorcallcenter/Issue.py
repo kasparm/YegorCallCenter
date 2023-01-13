@@ -8,6 +8,7 @@ class Issue():
             id (_type_): _description_
         """
         self._id = id
+        # 0 -> not resolved, 1 -> resolved
         self._status = 0
         self._difficulty = random.choice([0,1,2])
 

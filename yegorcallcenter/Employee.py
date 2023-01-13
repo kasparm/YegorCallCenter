@@ -14,6 +14,7 @@ class Employee(metaclass=ABCMeta):
         self._name = name
         self._level = level
         self._skill = skill
+        self._busy =  False
 
 
     def get_level(self):
@@ -24,6 +25,14 @@ class Employee(metaclass=ABCMeta):
 
     def get_skill(self):
         return self._skill
+    
+    def set_busy(self):
+        self._busy = True
+    def set_free(self):
+        self._busy = False
+    def is_busy(self):
+        return self._busy
+
 
 
 
@@ -31,7 +40,6 @@ class Operator(Employee):
 
     def __init__(self, name=uuid.uuid4(), level=0, skill = 1) -> None:
         super().__init__(name, level, skill)
-        print(name)
 
 class Supervisor(Employee):
 
