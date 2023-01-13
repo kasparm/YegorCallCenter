@@ -8,11 +8,11 @@ import yegorcallcenter.Caller as Caller
 def test_callcenter_creation():
     call_center = CC.CallCenter()
     assert not call_center._activecalls
-    assert not call_center._employee
     assert not call_center._queue
 
     call_center1 = CC.CallCenter(10,2,1)
-    assert len(call_center1._employee) == 13
+    assert len(call_center1._employee[0]) + len(call_center1._employee[1]) + len(call_center1._employee[2]) == 13
+
 
 def test_callcenter_new_call():
     call_center = CC.CallCenter(10,2,1)
@@ -22,6 +22,18 @@ def test_callcenter_new_call():
     call_01 = Call.Call(caller_01,issue_01)
 
     call_center.incomming_call(call_01)
+    call_center.incomming_call(call_01)
+
+    issue_02 = Issue.Issue()
+    issue_02._difficulty = 2
+    call_02 = Call.Call(caller_01,issue_02)
+    assert call_02.get_issue().get_status() == 0
+    assert call_02.get_escal_level() == 0
+    call_center.incomming_call(call_02)
+    assert call_02.get_escal_level() == 2
+    assert call_02.get_issue().get_status() == 1
+    assert call_02.get_escal_level() == 2
+
 
 
 def test_callcenter_overload():
