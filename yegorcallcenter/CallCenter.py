@@ -34,10 +34,13 @@ class CallCenter():
 
     def incomming_call(self, call:C):
         if call.get_issue().get_status() == 0:
-            print(call.get_issue().get_status()," ",self._queue," ",call._id)
             self._queue.append(call)
+            print("Call intake - call ID: ",call._id)
             self.work()
-        print(call.get_issue().get_status()," ",self._queue," ",call._id)
+        else:
+            # call resolved
+            pass
+        
 
         
     #def escalate_call(self, call:C):
@@ -50,7 +53,8 @@ class CallCenter():
         while self._queue:
             call = self._queue.pop(0)
             call_escal_level = call.get_escal_level()
-            print("call_level: ",call_escal_level)
+            issue_dif = call.get_issue().get_difficulty()
+            print("Work - issue difficulty ",issue_dif," esc level: ",call_escal_level," queue: ",self._queue," call ID: ",call._id)
             # find free employee of this level
             emp = self._free_employee(call_escal_level)
             if not emp:
@@ -61,6 +65,9 @@ class CallCenter():
                 emp.set_free()
                 if not resolved:
                     self._queue.append(call)
+                    print("Call escalated")
+                else:
+                    print("Call resolved")
             
     def _free_employee(self, level):
         # return free employee for level or None

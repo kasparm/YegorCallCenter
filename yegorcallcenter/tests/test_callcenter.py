@@ -34,11 +34,24 @@ def test_callcenter_new_call():
     assert call_02.get_issue().get_status() == 1
     assert call_02.get_escal_level() == 2
 
-
+def test_callcenter_escalation():
+    call_center = CC.CallCenter(1,1,1)
+    difficulty = [1,2]
+    for i in range(len(difficulty)):
+        caller_01 = Caller.Caller("testter_01")
+        issue_01 = Issue.Issue()
+        issue_01._difficulty = difficulty[i]
+        call_01 = Call.Call(caller_01,issue_01)
+        call_center.incomming_call(call_01)
 
 def test_callcenter_overload():
-    assert True
-
-def test_callcenter_escalation():
-    assert True
+    call_center = CC.CallCenter(1,1,1)
+    difficulty = 2
+    n_calls = 10
+    for i in range(n_calls):
+        caller_01 = Caller.Caller("testter_01")
+        issue_01 = Issue.Issue()
+        issue_01._difficulty = difficulty
+        call_01 = Call.Call(caller_01,issue_01)
+        call_center.incomming_call(call_01)
 
