@@ -1,6 +1,6 @@
 
 ## Purpose
-Yegor Bugayenko wrote a book about opject-oriented programing callend Elegand Objects. Some people call the approach contravertial, some are trying to adapt the concepts from the book and some whould like to propose changes.
+Yegor Bugayenko wrote a book about opject-oriented programing called Elegand Objects. Some people call the approach contravertial, some are trying to adapt the concepts from the book and some whould like to propose changes.
 This software will implement a call center where people can call in and get issues resolved.
 
 ## PR's to follow the concept of Elegant Objects
@@ -16,7 +16,7 @@ Each chapter of the book [Elegant Objects by Yegor Bugayenko](https://www.yegor2
 Source: https://github.com/donnemartin/system-design-primer/blob/master/solutions/object_oriented_design/call_center/call_center.ipynb
 
 ## Design
-We will designing this with 4 classes:
+We will be designing this with 4 classes:
 - Call
 - Employee
   - Operator
