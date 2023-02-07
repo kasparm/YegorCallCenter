@@ -28,7 +28,7 @@ class CallCenter:
 
         self.work()
 
-    def incomming_call(self, call: Call):
+    def incoming_call(self, call: Call):
         if call.get_issue().get_status() == 0:
             self._queue.append(call)
             print("Call intake - call ID: ", call._id)
@@ -39,9 +39,9 @@ class CallCenter:
 
     # def escalate_call(self, call:C):
 
-    # setup call center fuctionality
+    # setup call center functionality
     # send employees to work
-    # check if there is a call waiting and assing
+    # check if there is a call waiting and assign
     # to available employees
     def work(self):
         while self._queue:

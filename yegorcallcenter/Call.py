@@ -9,7 +9,7 @@ class Call:
         self._caller = caller
         self._issue = issue
         self._in_progress = True
-        self._escal_level = 0  # 0=intake;1=escalate lavel 1; 2=escalate level 2
+        self._escal_level = 0  # 0=intake;1=escalate level 1; 2=escalate level 2
         self._employee = []
 
     def get_issue(self):
