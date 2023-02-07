@@ -1,6 +1,6 @@
 
 ## Purpose
-Yegor Bugayenko wrote a book about opject-oriented programing called Elegand Objects. Some people call the approach contravertial, some are trying to adapt the concepts from the book and some whould like to propose changes.
+Yegor Bugayenko wrote a book about object-oriented programing called Elegant Objects. Some people call the approach controversial, some are trying to adapt the concepts from the book and some would like to propose changes.
 This software will implement a call center where people can call in and get issues resolved.
 
 ## PR's to follow the concept of Elegant Objects
