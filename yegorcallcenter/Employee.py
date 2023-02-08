@@ -3,7 +3,7 @@ from abc import ABCMeta
 
 
 class Employee(metaclass=ABCMeta):
-    def __init__(self, name, level, skill) -> None:
+    def __init__(self, name = None, level = 0, skill = 0) -> None:
         """Employee of the call center
 
         Args:
@@ -13,7 +13,7 @@ class Employee(metaclass=ABCMeta):
             skill (int): skill of the employee 0 = not very, 1 = skilled, 2 = very skilled
         """
         self._id = uuid.uuid4()
-        self._name = name
+        self._name = name if name else self._id
         self._level = level
         self._skill = skill
         self._busy = False
