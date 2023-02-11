@@ -3,7 +3,7 @@ from abc import ABCMeta
 
 
 class Employee(metaclass=ABCMeta):
-    def __init__(self, name = None, level = 0, skill = 0) -> None:
+    def __init__(self, name=None, level=0, skill=0) -> None:
         """Employee of the call center
 
         Args:
