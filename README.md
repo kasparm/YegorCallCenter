@@ -11,6 +11,17 @@ Each chapter of the book [Elegant Objects by Yegor Bugayenko](https://www.yegor2
 - [ ] Make one constructor primary
 - [ ] Keep constructor code free
 
+### Chapter 2 - Education
+- [ ] Encapsulate as little as possible
+- [ ] Encapsulate something at the very least
+- [ ] Always use interfaces
+- [ ] Choose method names carefully
+- [ ] Don't use public constants
+- [ ] Be imputable 
+- [ ] Write tests instead of documentation
+- [ ] Don't mock use fakes
+- [ ] Keep interfaces short, use smarts
+
 # Call Center Design
 
 Source: https://github.com/donnemartin/system-design-primer/blob/master/solutions/object_oriented_design/call_center/call_center.ipynb
