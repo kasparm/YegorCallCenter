@@ -26,8 +26,6 @@ class CallCenter:
         for i in range(n_director):
             self._employee[2].append(Employee.Director())
 
-        self.work()
-
     def incoming_call(self, call: Call):
         if call.get_issue().get_status() == 0:
             self._queue.append(call)
