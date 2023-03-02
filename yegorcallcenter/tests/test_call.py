@@ -11,7 +11,7 @@ def test_call():
     assert c._in_progress
 
 
-def test_call_assignement():
+def test_call_assignment():
     cler = Caller.Caller("test")
     iue = Issue.Issue()
     iue._difficulty = 0
