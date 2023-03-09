@@ -1,6 +1,8 @@
 import uuid
 from abc import ABCMeta
 
+from yegorcallcenter.EmployeeQualification import EmployeeQualification
+
 
 class Employee(metaclass=ABCMeta):
     def __init__(self, name=None, level=0, skill=0) -> None:
@@ -14,18 +16,14 @@ class Employee(metaclass=ABCMeta):
         """
         self._id = uuid.uuid4()
         self._name = name if name else self._id
-        self._level = level
-        self._skill = skill
+        self._qualification = EmployeeQualification(level, skill)
         self._busy = False
-
-    def get_level(self):
-        return self._level
 
     def get_name(self):
         return self._name
 
-    def get_skill(self):
-        return self._skill
+    def get_qualification(self):
+        return self._qualification
 
     def set_busy(self):
         self._busy = True
