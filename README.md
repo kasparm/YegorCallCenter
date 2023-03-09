@@ -12,8 +12,8 @@ Each chapter of the book [Elegant Objects by Yegor Bugayenko](https://www.yegor2
 - [ ] Keep constructor code free
 
 ### Chapter 2 - Education
-- [ ] Encapsulate as little as possible
-- [ ] Encapsulate something at the very least
+- [ ] Encapsulate as little as possible 
+- [ ] Encapsulate something at the very least [Blog post](https://www.yegor256.com/2014/12/15/how-much-your-objects-encapsulate.html)
 - [ ] Always use interfaces
 - [ ] Choose method names carefully
 - [ ] Don't use public constants
