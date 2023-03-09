@@ -1,5 +1,4 @@
-from yegorcallcenter import Call as Call
-from yegorcallcenter import Employee as Employee
+from yegorcallcenter import Call, Employee
 
 
 class CallCenter:
@@ -11,13 +10,13 @@ class CallCenter:
             n_supervisor (int, optional): _description_. Defaults to 0.
             n_director (int, optional): _description_. Defaults to 0.
         """
-        self._activecalls = []
-        self._incommingcalls = []
+        self._active_calls = []
+        self._incoming_calls = []
 
         # initiate employees
         # 0 -> operator , 1 -> supervisor, 2 -> director
         self._employee = {0: [], 1: [], 2: []}
-        self._queue = []
+        self._call_queue = []
 
         for i in range(n_operator):
             self._employee[0].append(Employee.Operator())
@@ -28,7 +27,7 @@ class CallCenter:
 
     def incoming_call(self, call: Call):
         if call.get_issue().get_status() == 0:
-            self._queue.append(call)
+            self._call_queue.append(call)
             print("Call intake - call ID: ", call._id)
             self.work()
         else:
@@ -42,30 +41,30 @@ class CallCenter:
     # check if there is a call waiting and assign
     # to available employees
     def work(self):
-        while self._queue:
-            call = self._queue.pop(0)
-            call_escal_level = call.get_escal_level()
-            issue_dif = call.get_issue().get_difficulty()
+        while self._call_queue:
+            call = self._call_queue.pop(0)
+            call_escalate_level = call._call_status.get_escalation_level()
+            issue_difficulty = call.get_issue().get_difficulty()
             print(
                 "Work - issue difficulty ",
-                issue_dif,
+                issue_difficulty,
                 " esc level: ",
-                call_escal_level,
+                call_escalate_level,
                 " queue: ",
-                self._queue,
+                self._call_queue,
                 " call ID: ",
                 call._id,
             )
             # find free employee of this level
-            emp = self._free_employee(call_escal_level)
+            emp = self._free_employee(call_escalate_level)
             if not emp:
-                self._queue.append(call)
+                self._call_queue.append(call)
             else:
                 emp.set_busy()
                 resolved = call.assign_employee(emp)
                 emp.set_free()
                 if not resolved:
-                    self._queue.append(call)
+                    self._call_queue.append(call)
                     print("Call escalated")
                 else:
                     print("Call resolved")

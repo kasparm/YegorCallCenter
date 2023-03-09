@@ -1,6 +1,6 @@
 import uuid
 
-from yegorcallcenter import Caller, Employee, Issue
+from yegorcallcenter import Caller, CallStatus, Employee, Issue
 
 
 class Call:
@@ -8,21 +8,19 @@ class Call:
         self._id = uuid.uuid4()
         self._caller = caller
         self._issue = issue
-        self._in_progress = True
-        self._escal_level = 0  # 0=intake;1=escalate level 1; 2=escalate level 2
-        self._employee = []
+        self._call_status = CallStatus.CallStatus()
 
     def get_issue(self):
         return self._issue
 
-    def get_escal_level(self):
-        return self._escal_level
+    def escalate(self):
+        # raise escalation level
+        self._call_status.escalate_call()
 
     def assign_employee(self, e: Employee) -> bool:
-        self._employee.append(e)
-        if self._issue.get_difficulty() <= e.get_level():
+        if self._issue.get_difficulty() <= e.get_qualification().get_level():
             self._issue.set_resolved()
             return True
         else:
-            self._escal_level += 1
+            self.escalate()
             return False

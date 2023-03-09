@@ -8,7 +8,7 @@ def test_call():
     cler = Caller.Caller("test")
     iue = Issue.Issue()
     c = Call.Call(cler, iue)
-    assert c._in_progress
+    assert c._call_status.in_progress()
 
 
 def test_call_assignment():
