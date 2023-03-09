@@ -6,8 +6,8 @@ import yegorcallcenter.Issue as Issue
 
 def test_callcenter_creation():
     call_center = CallCenter.CallCenter()
-    assert not call_center._activecalls
-    assert not call_center._queue
+    assert not call_center._active_calls
+    assert not call_center._call_queue
 
     call_center1 = CallCenter.CallCenter(10, 2, 1)
     assert (
@@ -32,11 +32,11 @@ def test_callcenter_new_call():
     issue_02._difficulty = 2
     call_02 = Call.Call(caller_01, issue_02)
     assert call_02.get_issue().get_status() == 0
-    assert call_02.get_escal_level() == 0
+    assert call_02._call_status.get_escalation_level() == 0
     call_center.incoming_call(call_02)
-    assert call_02.get_escal_level() == 2
+    assert call_02._call_status.get_escalation_level() == 2
     assert call_02.get_issue().get_status() == 1
-    assert call_02.get_escal_level() == 2
+    assert call_02._call_status.get_escalation_level() == 2
 
 
 def test_callcenter_escalation():
