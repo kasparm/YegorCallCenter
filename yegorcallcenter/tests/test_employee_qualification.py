@@ -1,11 +1,11 @@
 import pytest
 
-from yegorcallcenter.EmployeeQualification import EmployeeQualification
+from yegorcallcenter.EmployeeQualification import BasicEmployeeQualification
 
 
 @pytest.fixture
 def qualification():
-    return EmployeeQualification(level=5, skill=8)
+    return BasicEmployeeQualification(level=5, skill=8)
 
 
 def test_get_level(qualification):
@@ -17,6 +17,6 @@ def test_get_skill(qualification):
 
 
 def test_default_values():
-    qualification = EmployeeQualification()
+    qualification = BasicEmployeeQualification()
     assert qualification.get_level() == 0
     assert qualification.get_skill() == 0

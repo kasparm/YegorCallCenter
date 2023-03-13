@@ -1,11 +1,11 @@
 import pytest
 
-from yegorcallcenter.CallStatus import CallStatus
+from yegorcallcenter.CallStatus import BasicCallStatus
 
 
 @pytest.fixture
 def call_status():
-    return CallStatus()
+    return BasicCallStatus()
 
 
 def test_call_status_init(call_status):

@@ -1,7 +1,18 @@
+import abc
+
 from yegorcallcenter import Call, Employee
 
 
-class CallCenter:
+class CallCenter(metaclass=abc.ABCMeta):
+    def __init__(self) -> None:
+        pass
+
+    @abc.abstractmethod
+    def incoming_call(self, call: Call):
+        pass
+
+
+class BasicCallCenter(CallCenter):
     def __init__(self, n_operator=1, n_supervisor=1, n_director=1) -> None:
         """CallCenter
             TODO: There must be at least one employee of each type
@@ -10,6 +21,7 @@ class CallCenter:
             n_supervisor (int, optional): _description_. Defaults to 0.
             n_director (int, optional): _description_. Defaults to 0.
         """
+        super().__init__()
         self._active_calls = []
         self._incoming_calls = []
 
@@ -29,7 +41,7 @@ class CallCenter:
         if call.get_issue().get_status() == 0:
             self._call_queue.append(call)
             print("Call intake - call ID: ", call._id)
-            self.work()
+            self._work()
         else:
             # call resolved
             pass
@@ -40,7 +52,7 @@ class CallCenter:
     # send employees to work
     # check if there is a call waiting and assign
     # to available employees
-    def work(self):
+    def _work(self):
         while self._call_queue:
             call = self._call_queue.pop(0)
             call_escalate_level = call._call_status.get_escalation_level()
@@ -61,7 +73,7 @@ class CallCenter:
                 self._call_queue.append(call)
             else:
                 emp.set_busy()
-                resolved = call.assign_employee(emp)
+                resolved = call.resolved(emp)
                 emp.set_free()
                 if not resolved:
                     self._call_queue.append(call)
