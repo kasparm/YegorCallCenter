@@ -1,9 +1,11 @@
+import abc
 import uuid
-from abc import ABCMeta
+
+from yegorcallcenter.EmployeeQualification import BasicEmployeeQualification
 
 
-class Employee(metaclass=ABCMeta):
-    def __init__(self, name, level, skill) -> None:
+class Employee(metaclass=abc.ABCMeta):
+    def __init__(self, name=None, level=0, skill=0) -> None:
         """Employee of the call center
 
         Args:
@@ -13,19 +15,40 @@ class Employee(metaclass=ABCMeta):
             skill (int): skill of the employee 0 = not very, 1 = skilled, 2 = very skilled
         """
         self._id = uuid.uuid4()
-        self._name = name
-        self._level = level
-        self._skill = skill
+        self._name = name if name else self._id
+        self._qualification = BasicEmployeeQualification(level, skill)
         self._busy = False
 
-    def get_level(self):
-        return self._level
+    @abc.abstractmethod
+    def get_name(self):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_qualification(self):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def set_busy(self):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def set_free(self):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def is_busy(self):
+        raise NotImplementedError
+
+
+class Operator(Employee):
+    def __init__(self, name=uuid.uuid4(), skill=1) -> None:
+        super().__init__(name, level=0, skill=skill)
 
     def get_name(self):
         return self._name
 
-    def get_skill(self):
-        return self._skill
+    def get_qualification(self):
+        return self._qualification
 
     def set_busy(self):
         self._busy = True
@@ -37,16 +60,41 @@ class Employee(metaclass=ABCMeta):
         return self._busy
 
 
-class Operator(Employee):
-    def __init__(self, name=uuid.uuid4(), level=0, skill=1) -> None:
-        super().__init__(name, level, skill)
-
-
 class Supervisor(Employee):
-    def __init__(self, name=uuid.uuid4(), level=1, skill=1) -> None:
-        super().__init__(name, level, skill)
+    def __init__(self, name=uuid.uuid4(), skill=1) -> None:
+        super().__init__(name, level=1, skill=skill)
+
+    def get_name(self):
+        return self._name
+
+    def get_qualification(self):
+        return self._qualification
+
+    def set_busy(self):
+        self._busy = True
+
+    def set_free(self):
+        self._busy = False
+
+    def is_busy(self):
+        return self._busy
 
 
 class Director(Employee):
-    def __init__(self, name=uuid.uuid4(), level=2, skill=1) -> None:
-        super().__init__(name, level, skill)
+    def __init__(self, name=uuid.uuid4(), skill=1) -> None:
+        super().__init__(name, level=2, skill=skill)
+
+    def get_name(self):
+        return self._name
+
+    def get_qualification(self):
+        return self._qualification
+
+    def set_busy(self):
+        self._busy = True
+
+    def set_free(self):
+        self._busy = False
+
+    def is_busy(self):
+        return self._busy
