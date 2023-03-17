@@ -6,11 +6,11 @@ class EmployeeQualification(metaclass=abc.ABCMeta):
         pass
 
     @abc.abstractclassmethod
-    def get_level(self):
+    def level(self):
         return self._level
 
     @abc.abstractclassmethod
-    def get_skill(self):
+    def skill(self):
         return self._skill
 
 
@@ -20,8 +20,8 @@ class BasicEmployeeQualification(EmployeeQualification):
         self._level = level
         self._skill = skill
 
-    def get_level(self):
+    def level(self):
         return self._level
 
-    def get_skill(self):
+    def skill(self):
         return self._skill

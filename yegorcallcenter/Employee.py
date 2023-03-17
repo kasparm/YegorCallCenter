@@ -20,23 +20,23 @@ class Employee(metaclass=abc.ABCMeta):
         self._busy = False
 
     @abc.abstractmethod
-    def get_name(self):
+    def name(self):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_qualification(self):
+    def qualification(self):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def set_busy(self):
+    def assign(self):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def set_free(self):
+    def release(self):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def is_busy(self):
+    def busy(self):
         raise NotImplementedError
 
 
@@ -44,19 +44,19 @@ class Operator(Employee):
     def __init__(self, name=uuid.uuid4(), skill=1) -> None:
         super().__init__(name, level=0, skill=skill)
 
-    def get_name(self):
+    def name(self):
         return self._name
 
-    def get_qualification(self):
+    def qualification(self):
         return self._qualification
 
-    def set_busy(self):
+    def assign(self):
         self._busy = True
 
-    def set_free(self):
+    def release(self):
         self._busy = False
 
-    def is_busy(self):
+    def busy(self):
         return self._busy
 
 
@@ -64,19 +64,19 @@ class Supervisor(Employee):
     def __init__(self, name=uuid.uuid4(), skill=1) -> None:
         super().__init__(name, level=1, skill=skill)
 
-    def get_name(self):
+    def name(self):
         return self._name
 
-    def get_qualification(self):
+    def qualification(self):
         return self._qualification
 
-    def set_busy(self):
+    def assign(self):
         self._busy = True
 
-    def set_free(self):
+    def release(self):
         self._busy = False
 
-    def is_busy(self):
+    def busy(self):
         return self._busy
 
 
@@ -84,17 +84,17 @@ class Director(Employee):
     def __init__(self, name=uuid.uuid4(), skill=1) -> None:
         super().__init__(name, level=2, skill=skill)
 
-    def get_name(self):
+    def name(self):
         return self._name
 
-    def get_qualification(self):
+    def qualification(self):
         return self._qualification
 
-    def set_busy(self):
+    def assign(self):
         self._busy = True
 
-    def set_free(self):
+    def release(self):
         self._busy = False
 
-    def is_busy(self):
+    def busy(self):
         return self._busy

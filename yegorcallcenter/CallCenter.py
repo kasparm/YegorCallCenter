@@ -8,7 +8,7 @@ class CallCenter(metaclass=abc.ABCMeta):
         pass
 
     @abc.abstractmethod
-    def incoming_call(self, call: Call):
+    def intake(self, call: Call):
         pass
 
 
@@ -37,8 +37,8 @@ class BasicCallCenter(CallCenter):
         for i in range(n_director):
             self._employee[2].append(Employee.Director())
 
-    def incoming_call(self, call: Call):
-        if call.get_issue().get_status() == 0:
+    def intake(self, call: Call):
+        if call.issue().status() == 0:
             self._call_queue.append(call)
             print("Call intake - call ID: ", call._id)
             self._work()
@@ -55,8 +55,8 @@ class BasicCallCenter(CallCenter):
     def _work(self):
         while self._call_queue:
             call = self._call_queue.pop(0)
-            call_escalate_level = call._call_status.get_escalation_level()
-            issue_difficulty = call.get_issue().get_difficulty()
+            call_escalate_level = call._call_status.escalation_level()
+            issue_difficulty = call.issue().difficulty()
             print(
                 "Work - issue difficulty ",
                 issue_difficulty,
@@ -72,9 +72,9 @@ class BasicCallCenter(CallCenter):
             if not emp:
                 self._call_queue.append(call)
             else:
-                emp.set_busy()
+                emp.assign()
                 resolved = call.resolved(emp)
-                emp.set_free()
+                emp.release()
                 if not resolved:
                     self._call_queue.append(call)
                     print("Call escalated")
@@ -84,6 +84,6 @@ class BasicCallCenter(CallCenter):
     def _free_employee(self, level):
         # return free employee for level or None
         for e in self._employee[level]:
-            if not e.is_busy():
+            if not e.busy():
                 return e
         return None

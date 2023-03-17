@@ -10,7 +10,7 @@ class CallStatus(metaclass=abc.ABCMeta):
         pass
 
     @abc.abstractmethod
-    def get_escalation_level(self):
+    def escalation_level(self):
         pass
 
     @abc.abstractmethod
@@ -18,11 +18,11 @@ class CallStatus(metaclass=abc.ABCMeta):
         pass
 
     @abc.abstractmethod
-    def set_in_progress(self):
+    def start_call(self):
         pass
 
     @abc.abstractmethod
-    def set_not_in_progress(self):
+    def stop_call(self):
         pass
 
 
@@ -35,14 +35,14 @@ class BasicCallStatus(CallStatus):
     def in_progress(self):
         return self._in_progress
 
-    def get_escalation_level(self):
+    def escalation_level(self):
         return self._escalation_level
 
     def escalate_call(self):
         self._escalation_level += 1
 
-    def set_in_progress(self):
+    def start_call(self):
         self._in_progress = True
 
-    def set_not_in_progress(self):
+    def stop_call(self):
         self._in_progress = False

@@ -11,7 +11,7 @@ class Call(metaclass=abc.ABCMeta):
         self._issue = issue
 
     @abc.abstractmethod
-    def get_issue(self):
+    def issue(self):
         pass
 
     @abc.abstractmethod
@@ -28,7 +28,7 @@ class BasicCall(Call):
         super().__init__(caller, issue)
         self._call_status = CallStatus.BasicCallStatus()
 
-    def get_issue(self):
+    def issue(self):
         return self._issue
 
     def escalate(self):
@@ -36,8 +36,8 @@ class BasicCall(Call):
         self._call_status.escalate_call()
 
     def resolved(self, e: Employee) -> bool:
-        if self._issue.get_difficulty() <= e.get_qualification().get_level():
-            self._issue.set_resolved()
+        if self._issue.difficulty() <= e.qualification().level():
+            self._issue.resolve()
             return True
         else:
             self.escalate()

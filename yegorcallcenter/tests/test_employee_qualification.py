@@ -9,14 +9,14 @@ def qualification():
 
 
 def test_get_level(qualification):
-    assert qualification.get_level() == 5
+    assert qualification.level() == 5
 
 
 def test_get_skill(qualification):
-    assert qualification.get_skill() == 8
+    assert qualification.skill() == 8
 
 
 def test_default_values():
     qualification = BasicEmployeeQualification()
-    assert qualification.get_level() == 0
-    assert qualification.get_skill() == 0
+    assert qualification.level() == 0
+    assert qualification.skill() == 0

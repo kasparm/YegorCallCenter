@@ -25,18 +25,18 @@ def test_callcenter_new_call():
     issue_01 = Issue.BasicIssue()
     call_01 = Call.BasicCall(caller_01, issue_01)
 
-    call_center.incoming_call(call_01)
-    call_center.incoming_call(call_01)
+    call_center.intake(call_01)
+    call_center.intake(call_01)
 
     issue_02 = Issue.BasicIssue()
     issue_02._difficulty = 2
     call_02 = Call.BasicCall(caller_01, issue_02)
-    assert call_02.get_issue().get_status() == 0
-    assert call_02._call_status.get_escalation_level() == 0
-    call_center.incoming_call(call_02)
-    assert call_02._call_status.get_escalation_level() == 2
-    assert call_02.get_issue().get_status() == 1
-    assert call_02._call_status.get_escalation_level() == 2
+    assert call_02.issue().status() == 0
+    assert call_02._call_status.escalation_level() == 0
+    call_center.intake(call_02)
+    assert call_02._call_status.escalation_level() == 2
+    assert call_02.issue().status() == 1
+    assert call_02._call_status.escalation_level() == 2
 
 
 def test_callcenter_escalation():
@@ -47,7 +47,7 @@ def test_callcenter_escalation():
         issue_01 = Issue.BasicIssue()
         issue_01._difficulty = difficulty[i]
         call_01 = Call.BasicCall(caller_01, issue_01)
-        call_center.incoming_call(call_01)
+        call_center.intake(call_01)
 
 
 def test_callcenter_overload():
@@ -59,4 +59,4 @@ def test_callcenter_overload():
         issue_01 = Issue.BasicIssue()
         issue_01._difficulty = difficulty
         call_01 = Call.BasicCall(caller_01, issue_01)
-        call_center.incoming_call(call_01)
+        call_center.intake(call_01)

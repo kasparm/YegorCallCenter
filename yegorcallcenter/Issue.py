@@ -10,15 +10,15 @@ class Issue(metaclass=abc.ABCMeta):
         self._difficulty = None
 
     @abc.abstractmethod
-    def set_resolved(self):
+    def resolve(self):
         pass
 
     @abc.abstractmethod
-    def get_status(self):
+    def status(self):
         pass
 
     @abc.abstractmethod
-    def get_difficulty(self):
+    def difficulty(self):
         pass
 
 
@@ -33,11 +33,11 @@ class BasicIssue(Issue):
         id (_type_): _description_
     """
 
-    def set_resolved(self):
+    def resolve(self):
         self._status = 1
 
-    def get_status(self):
+    def status(self):
         return self._status
 
-    def get_difficulty(self):
+    def difficulty(self):
         return self._difficulty
