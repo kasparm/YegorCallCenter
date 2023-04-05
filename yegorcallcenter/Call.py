@@ -1,28 +1,44 @@
+import abc
 import uuid
 
-from yegorcallcenter import Caller, Employee, Issue
+from yegorcallcenter import Caller, CallStatus, Employee, Issue
 
 
-class Call:
+class Call(metaclass=abc.ABCMeta):
     def __init__(self, caller: Caller, issue: Issue) -> None:
         self._id = uuid.uuid4()
         self._caller = caller
         self._issue = issue
-        self._in_progress = True
-        self._escal_level = 0  # 0=intake;1=escalate level 1; 2=escalate level 2
-        self._employee = []
 
-    def get_issue(self):
+    @abc.abstractmethod
+    def issue(self):
+        pass
+
+    @abc.abstractmethod
+    def escalate(self):
+        pass
+
+    @abc.abstractmethod
+    def resolved(self, e: Employee) -> bool:
+        pass
+
+
+class BasicCall(Call):
+    def __init__(self, caller: Caller, issue: Issue) -> None:
+        super().__init__(caller, issue)
+        self._call_status = CallStatus.BasicCallStatus()
+
+    def issue(self):
         return self._issue
 
-    def get_escal_level(self):
-        return self._escal_level
+    def escalate(self):
+        # raise escalation level
+        self._call_status.escalate_call()
 
-    def assign_employee(self, e: Employee) -> bool:
-        self._employee.append(e)
-        if self._issue.get_difficulty() <= e.get_level():
-            self._issue.set_resolved()
+    def resolved(self, e: Employee) -> bool:
+        if self._issue.difficulty() <= e.qualification().level():
+            self._issue.resolve()
             return True
         else:
-            self._escal_level += 1
+            self.escalate()
             return False

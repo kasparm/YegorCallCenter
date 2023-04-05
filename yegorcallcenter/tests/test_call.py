@@ -5,42 +5,42 @@ import yegorcallcenter.Issue as Issue
 
 
 def test_call():
-    cler = Caller.Caller("test")
-    iue = Issue.Issue()
-    c = Call.Call(cler, iue)
-    assert c._in_progress
+    cler = Caller.BasicCaller("test")
+    iue = Issue.BasicIssue()
+    c = Call.BasicCall(cler, iue)
+    assert c._call_status.in_progress()
 
 
 def test_call_assignment():
-    cler = Caller.Caller("test")
-    iue = Issue.Issue()
+    cler = Caller.BasicCaller("test")
+    iue = Issue.BasicIssue()
     iue._difficulty = 0
-    c = Call.Call(cler, iue)
-    resolved = c.assign_employee(Employee.Employee(name="tester", level=0, skill=1))
+    c = Call.BasicCall(cler, iue)
+    resolved = c.resolved(Employee.Operator(name="tester", skill=1))
     assert resolved
     iue._difficulty = 1
-    resolved = c.assign_employee(Employee.Employee(name="tester", level=0, skill=1))
+    resolved = c.resolved(Employee.Operator(name="tester", skill=1))
     assert not resolved
     iue._difficulty = 2
-    resolved = c.assign_employee(Employee.Employee(name="tester", level=0, skill=1))
-    assert not resolved
-
-    iue._difficulty = 0
-    resolved = c.assign_employee(Employee.Employee(name="tester", level=1, skill=1))
-    assert resolved
-    iue._difficulty = 1
-    resolved = c.assign_employee(Employee.Employee(name="tester", level=1, skill=1))
-    assert resolved
-    iue._difficulty = 2
-    resolved = c.assign_employee(Employee.Employee(name="tester", level=1, skill=1))
+    resolved = c.resolved(Employee.Operator(name="tester", skill=1))
     assert not resolved
 
     iue._difficulty = 0
-    resolved = c.assign_employee(Employee.Employee(name="tester", level=2, skill=1))
+    resolved = c.resolved(Employee.Supervisor(name="tester", skill=1))
     assert resolved
     iue._difficulty = 1
-    resolved = c.assign_employee(Employee.Employee(name="tester", level=2, skill=1))
+    resolved = c.resolved(Employee.Supervisor(name="tester", skill=1))
     assert resolved
     iue._difficulty = 2
-    resolved = c.assign_employee(Employee.Employee(name="tester", level=2, skill=1))
+    resolved = c.resolved(Employee.Supervisor(name="tester", skill=1))
+    assert not resolved
+
+    iue._difficulty = 0
+    resolved = c.resolved(Employee.Director(name="tester", skill=1))
+    assert resolved
+    iue._difficulty = 1
+    resolved = c.resolved(Employee.Director(name="tester", skill=1))
+    assert resolved
+    iue._difficulty = 2
+    resolved = c.resolved(Employee.Director(name="tester", skill=1))
     assert resolved
